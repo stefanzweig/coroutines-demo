@@ -66,6 +66,14 @@ def get(path):
 start = time.time()
 Task(get('/foo'))
 Task(get('/bar'))
+Task(get('/foo'))
+Task(get('/bar'))
+Task(get('/foo'))
+Task(get('/bar'))
+Task(get('/foo'))
+Task(get('/bar'))
+Task(get('/foo'))
+Task(get('/bar'))
 
 while n_jobs:
     events = selector.select()
