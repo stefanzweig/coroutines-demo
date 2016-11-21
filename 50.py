@@ -35,7 +35,7 @@ def get(path):
     s.setblocking(False)
     try:
         s.connect(('localhost', 5000))
-    except BlockingIOError:
+    except Exception:
         pass
 
     f = Future()
