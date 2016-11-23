@@ -12,7 +12,7 @@ def get(path):
     s.setblocking(False)
     try:
         s.connect(('localhost', 5000))
-    except BlockingIOError:
+    except Exception as e:
         pass
     selector.register(s.fileno(), EVENT_WRITE, lambda: connected(s, path))
 
