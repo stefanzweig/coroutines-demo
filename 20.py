@@ -12,7 +12,7 @@ def get(path):
     s.setblocking(False)
     try:
         s.connect(('localhost', 5000))
-    except BlockingIOError:
+    except Exception as e:
         pass
     selector.register(s.fileno(), EVENT_WRITE, lambda: connected(s, path))
 
@@ -27,7 +27,7 @@ def connected(s, path):
             if not chunk:
                 break
             buf.append(chunk)
-        except OSError:
+        except Exception:
             pass
 
     s.close()
@@ -37,7 +37,14 @@ def connected(s, path):
 start = time.time()
 get('/foo')
 get('/bar')
+get('/foo')
+get('/bar')
+get('/foo')
+get('/bar')
+get('/foo')
+get('/bar')
 
+print n_jobs # number of jobs --> 8
 while n_jobs:
     events = selector.select()
     for key, mask in events:
